@@ -1,0 +1,106 @@
+﻿@using eGames.Data.Enum
+@*
+    @ViewData["Welcome"]
+<br />
+
+@ViewBag.Description
+
+*@
+
+@model NewGameVM
+
+@{
+    ViewData["Title"] = "Create a new Game";
+}
+
+<div class="row">
+    <div class="col-md-8 offset-2">
+        <p>
+            <h4>Create a new game</h4>
+        </p>
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Name" class="control-label"></label>
+                                <input asp-for="Name" class="form-control" />
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="StartDate" class="control-label"></label>
+                                <input asp-for="StartDate" type="date" class="form-control" />
+                                <span asp-validation-for="StartDate" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="EndDate" class="control-label"></label>
+                                <input asp-for="EndDate" type="date" class="form-control" />
+                                <span asp-validation-for="EndDate" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Price" class="control-label"></label>
+                                <input asp-for="Price" type="number" class="form-control" />
+                                <span asp-validation-for="Price" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="ImageURL" class="control-label"></label>
+                                <input asp-for="ImageURL" class="form-control" />
+                                <span asp-validation-for="ImageURL" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="GameEngineId" class="control-label"></label>
+                                <select asp-for="GameEngineId" class="form-control" asp-items="ViewBag.GameEngines"></select>
+                                <span asp-validation-for="GameEngineId" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="GameCategory" class="control-label"></label>
+                                <select asp-for="GameCategory" class="form-control" asp-items="Html.GetEnumSelectList<GameCategory>()"></select>
+                                <span asp-validation-for="GameCategory" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="LeadProgrammerId" class="control-label"></label>
+                                <select asp-for="LeadProgrammerId" class="form-control" asp-items="ViewBag.LeadProgrammers"></select>
+                                <span asp-validation-for="LeadProgrammerId" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="CharactersIds" class="control-label"></label>
+                                <select asp-for="CharactersIds" class="form-control" asp-items="ViewBag.Characters" multiple></select>
+                                <span asp-validation-for="CharactersIds" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label asp-for="Description" class="control-label"></label>
+                                <textarea asp-for="Description" class="form-control"></textarea>
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-4 offset-4 text-center">
+                        <img width="100%" id="ImageUrlPreview" />
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-outline-success float-right" />
+                        <a class="btn btn-outline-secondary" asp-action="Index">Show All</a>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $("#ImageURL").on("change", function() {
+            var output = document.getElementById("ImageUrlPreview");
+            output.src = $(this).val();
+        })
+    </script>
+                                }
